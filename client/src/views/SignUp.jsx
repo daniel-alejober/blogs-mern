@@ -67,7 +67,10 @@ const SignUp = () => {
         password: dataAccount.password,
         username: dataAccount.username,
       });
-      console.log(data);
+      if (data.data.success) {
+        localStorage.setItem("token", data.data.token);
+        navigate("/home");
+      }
     } catch (error) {
       setDataAlert({
         colorText: redText,

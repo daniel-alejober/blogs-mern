@@ -62,4 +62,14 @@ const login = async (req, res) => {
   }
 };
 
-export { createAccount, login };
+const homeAccount = async (req, res) => {
+  const { id } = req;
+  try {
+    const user = await AccountSchema.findById(id).select("-password");
+    res.status(200).json({ success: true, dataUser: user });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+export { createAccount, login, homeAccount };

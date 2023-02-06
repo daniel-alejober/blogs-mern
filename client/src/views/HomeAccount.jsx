@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import useUser from "../hooks/useUser";
 
 const HomeAccount = () => {
-  return (
-    <div>HomeAccount</div>
-  )
-}
+  const { confirmUser } = useUser();
+  const token = localStorage.getItem("token");
 
-export default HomeAccount
+  useEffect(() => {
+    confirmUser(token);
+  }, []);
+
+  return <div>HomeAccount</div>;
+};
+
+export default HomeAccount;

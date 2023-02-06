@@ -4,17 +4,23 @@ import Home from "./views/Home";
 import SignIn from "./views/SignIn";
 import SignUp from "./views/SignUp";
 import HomeAccount from "./views/HomeAccount";
+import ProtectedRoutes from "./views/ProtectedRoutes";
+import { UserProvider } from "./context/UserProvider";
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/home" element={<HomeAccount />} />
-      </Routes>
+      <UserProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route element={<ProtectedRoutes />}>
+            <Route path="/home" element={<HomeAccount />} />
+          </Route>
+        </Routes>
+      </UserProvider>
     </BrowserRouter>
   );
 }

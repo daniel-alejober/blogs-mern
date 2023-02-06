@@ -5,10 +5,12 @@ import InputForm from "../components/InputForm";
 import BtnForms from "../components/BtnForms";
 import Alert from "../components/Alert";
 import { red, redText } from "../Utils/colorsAlert";
+import useUser from "../hooks/useUser";
 
 const initialAler = { colorText: "", color: "", type: "", text: "" };
 
 const SignIn = () => {
+  const { setShowMenu } = useUser();
   const navigate = useNavigate();
   const [dataAccount, setDataAccount] = useState({
     email: "",
@@ -45,7 +47,9 @@ const SignIn = () => {
         password: dataAccount.password,
       });
       if (data.data.success) {
+        localStorage.setItem("token", data.data.token);
         navigate("/home");
+        setShowMenu(false);
       }
     } catch (error) {
       setDataAlert({
