@@ -16,6 +16,11 @@ export default function Header() {
     navigate("/home");
   };
 
+  const toNewArtitle = () => {
+    setShowMenu(false);
+    navigate("/newartitle");
+  };
+
   const toProfile = () => {
     setShowMenu(false);
     navigate("/profile");
@@ -106,7 +111,10 @@ export default function Header() {
                 </button>
               </li>
               <li>
-                <button className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full">
+                <button
+                  onClick={toNewArtitle}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full"
+                >
                   Add New Artitle
                 </button>
               </li>
