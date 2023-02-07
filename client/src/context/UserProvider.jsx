@@ -8,6 +8,7 @@ const UserProvider = ({ children }) => {
   const navigate = useNavigate();
   const [dataUser, setDataUser] = useState({});
   const [showMenu, setShowMenu] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const confirmUser = async (token) => {
     const config = {
@@ -29,7 +30,15 @@ const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ dataUser, showMenu, setDataUser, setShowMenu, confirmUser }}
+      value={{
+        dataUser,
+        showMenu,
+        loading,
+        setDataUser,
+        setShowMenu,
+        confirmUser,
+        setLoading,
+      }}
     >
       {children}
     </UserContext.Provider>

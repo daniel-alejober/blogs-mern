@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
@@ -11,8 +11,14 @@ export default function Header() {
     confirmUser(token);
   }, []);
 
+  const toYourArtitles = () => {
+    setShowMenu(false);
+    navigate("/home");
+  };
+
   const toProfile = () => {
     setShowMenu(false);
+    navigate("/profile");
   };
 
   const logout = () => {
@@ -23,7 +29,7 @@ export default function Header() {
   return (
     <div className="flex items-center justify-between  px-5  dark:bg-gray-900 border-gray-100 py-6 md:justify-start md:space-x-10">
       <div className="flex justify-start lg:w-0 lg:flex-1">
-        <Link to="/">
+        <Link to="/" onClick={() => setShowMenu(false)}>
           <span className="text-3xl lg:text-4xl text-white font-extrabold">
             My Blog
           </span>
@@ -84,13 +90,16 @@ export default function Header() {
               aria-labelledby="dropdownDefault"
             >
               <li>
-                <button className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full">
+                <button
+                  onClick={toProfile}
+                  className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full"
+                >
                   Profile
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => navigate("/home")}
+                  onClick={toYourArtitles}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full"
                 >
                   Your Artitles
