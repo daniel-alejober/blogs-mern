@@ -31,8 +31,8 @@ const HomeAccount = () => {
 
       if (data.success) {
         setDataArticles(data.articles);
+        setLoading(false);
       }
-      console.log(dataArticles);
     } catch (error) {
       setLoading(false);
       setDataAlert({

@@ -30,6 +30,7 @@ const newArtitle = async (req, res) => {
       summary,
       content,
       photo: photoUrl ? photoUrl : "",
+      creator: id,
     });
     user.artitles.push(newArtitle._id);
     await user.save();
@@ -43,7 +44,7 @@ const getArticlesByUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    //*en el populate va el nombre de la tabla
+    //*en el populate va el nombre del CAMPO que tiene la union con la tabla
     const user = await AccountSchema.findById(id).populate("artitles");
     res.status(200).json({ success: true, articles: user.artitles });
   } catch (error) {
@@ -51,4 +52,17 @@ const getArticlesByUser = async (req, res) => {
   }
 };
 
-export { newArtitle, getArticlesByUser };
+const allArticles = async (req, res) => {
+  try {
+    const articles = await ArtitleSchema.find({}).populate({
+      path: "creator",
+      select: "username photo",
+    });
+
+    res.status(200).json({ success: true, articles });
+  } catch (error) {
+    res.status(500).json({ message: "Error in Server" });
+  }
+};
+
+export { newArtitle, getArticlesByUser, allArticles };
