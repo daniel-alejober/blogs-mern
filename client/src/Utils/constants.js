@@ -26,4 +26,6 @@ const formats = [
   "link",
 ];
 
-export { formats, modules };
+const initialAler = { colorText: "", color: "", type: "", text: "" };
+
+export { formats, modules, initialAler };

@@ -6,6 +6,9 @@ const Account = new mongoose.Schema({
   password: { type: String, require: true },
   token: { type: String },
   photo: { type: String },
+  artitles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Artitle" }],
+  //*en ref es el nombre que va dentro del model entre ""
+  //*mongoose.model("Artitle", Artitle);
 });
 
 const AccountSchema = mongoose.model("Account", Account);

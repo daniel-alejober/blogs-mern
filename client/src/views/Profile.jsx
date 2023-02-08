@@ -6,19 +6,19 @@ import useUser from "../hooks/useUser";
 import clientAxios from "../Utils/clientAxios";
 import Alert from "../components/Alert";
 import { green, greenText, red, redText } from "../Utils/colorsAlert";
-
-const initialAler = { colorText: "", color: "", type: "", text: "" };
+import { initialAler } from "../Utils/constants";
 
 const Profile = () => {
-  const { dataUser, loading, setLoading, setDataUser } = useUser();
+  const { dataUser, loading, setLoading, setDataUser, readFileAsync } =
+    useUser();
   const [profileData, setProfileData] = useState({
     username: "",
     password: "",
     email: "",
   });
   const [file, setFile] = useState("");
-  const [b64, setB64] = useState("");
   const [dataAlert, setDataAlert] = useState(initialAler);
+  let b64;
 
   useEffect(() => {
     const loadingData = () => {
@@ -44,6 +44,7 @@ const Profile = () => {
     setLoading(true);
 
     if (file.size > 2000000) {
+      setLoading(false);
       setDataAlert({
         colorText: redText,
         color: red,
@@ -56,12 +57,9 @@ const Profile = () => {
       return;
     }
 
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      const b64 = reader.result;
-      setB64(b64);
-    };
+    if (file) {
+      b64 = await readFileAsync(file);
+    }
 
     try {
       const { data } = await clientAxios.put(
@@ -87,7 +85,6 @@ const Profile = () => {
         return;
       }
     } catch (error) {
-      console.log(error);
       setLoading(false);
       setDataAlert({
         colorText: redText,

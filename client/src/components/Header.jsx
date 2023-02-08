@@ -107,7 +107,7 @@ export default function Header() {
                   onClick={toYourArtitles}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full"
                 >
-                  Your Artitles
+                  Your Articles
                 </button>
               </li>
               <li>
@@ -115,7 +115,7 @@ export default function Header() {
                   onClick={toNewArtitle}
                   className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white w-full"
                 >
-                  Add New Artitle
+                  Add New Article
                 </button>
               </li>
               <li>
