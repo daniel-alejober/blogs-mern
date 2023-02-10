@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const Account = new mongoose.Schema({
-  email: { type: String, require: true, unique: true },
-  username: { type: String, require: true },
-  password: { type: String, require: true },
+  email: { type: String, required: true, unique: true },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
   token: { type: String },
   photo: { type: String },
   artitles: [{ type: mongoose.Schema.Types.ObjectId, ref: "Artitle" }],
