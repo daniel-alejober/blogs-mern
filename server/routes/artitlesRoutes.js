@@ -1,4 +1,4 @@
-import expres from "express";
+import express from "express";
 import validateJWT from "../jwt/validateJWT.js";
 import {
   newArtitle,
@@ -6,7 +6,7 @@ import {
   allArticles,
 } from "../controllers/artitleController.js";
 
-const router = expres.Router();
+const router = express.Router();
 
 router.post("/newartitle", validateJWT, newArtitle);
 router.get("/user/:id", getArticlesByUser);
